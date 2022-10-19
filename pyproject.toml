@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "oipie-api-core"
+version = "0.1.0"
+description = ""
+authors = ["Jaume Moreno <morenocantoj@gmail.com>", "Jorge Bodega <jorge@acidtango.com>"]
+readme = "README.md"
+packages = [{include = "oipie_api_core"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = {extras = ["all"], version = "^0.85.1"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
