@@ -1,0 +1,18 @@
+# Virtual environments
+.venv
+
+# Pycache
+__pycache__
+.pytest_cache
+
+# Environment
+.env
+
+# Instance
+instance
+
+# IDE
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea
