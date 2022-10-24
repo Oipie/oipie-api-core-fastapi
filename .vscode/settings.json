@@ -1,0 +1,10 @@
+{
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true
+  },
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": ".venv/bin/black",
+  "python.linting.pylintPath": ".venv/bin/pylint",
+  "python.linting.pylintEnabled": true
+}
