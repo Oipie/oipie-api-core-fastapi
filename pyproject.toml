@@ -10,6 +10,7 @@ packages = [{include = "oipie_api_core"}]
 python = "^3.10"
 fastapi = {extras = ["all"], version = "^0.85.1"}
 SQLAlchemy = "^1.4.42"
+databases = "^0.6.1"
 
 
 [build-system]
