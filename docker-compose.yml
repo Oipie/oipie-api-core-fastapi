@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  postgres:
+    container_name: oipie-fastapi
+    image: postgres:14.5
+    volumes:
+      - ./scripts/create-multiple-postgresql-databases.sh:/docker-entrypoint-initdb.d/99-oipie.sh
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: oipie
+      POSTGRES_PASSWORD: password
+      PGDATA: /data/postgres
+      POSTGRES_TEST_DATABASE: oipie_tests
+    restart: unless-stopped
