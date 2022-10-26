@@ -8,7 +8,7 @@ from src.config.database import database_url_connection
 
 engine = create_engine(database_url_connection())
 SessionLocal = sessionmaker(bind=engine)
-Base = declarative_base()
+BaseModel = declarative_base()
 
 
 def get_database() -> Session:
