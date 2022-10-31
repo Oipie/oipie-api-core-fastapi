@@ -42,7 +42,7 @@ class RecipeModel(BaseModel):
         """
         return Recipe(
             {
-                "uuid": self.uuid,
+                "uuid": str(self.uuid),
                 "name": self.name,
                 "favourite_amount": self.favourite_amount,
                 "preparation_time": self.preparation_time,
