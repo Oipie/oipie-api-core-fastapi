@@ -1,3 +1,20 @@
+[tool.poe.tasks]
+format = "black ."
+"format:check" = "black --check ."
+lint = "pylint --output-format colorized src/**/*.py"
+"lint:check" = "pylint src/**/*.py"
+"migration:up" = { "cmd" = "alembic upgrade head", "envfile" = ".env" }
+"migration:down" = { "cmd" = "alembic downgrade head-1", "envfile" = ".env" }
+"migration:test:up" = { "cmd" = "alembic upgrade head", "env" = { DATABASE_NAME = "oipie_tests" } }
+"migration:test:down" = { "cmd" = "alembic downgrade head-1", "env" = { DATABASE_NAME = "oipie_tests" } }
+"run:checks" = ["format:check", "lint:check"]
+"start:dev" = "uvicorn src.main:app --reload"
+test = "pytest"
+
+  [tool.poe.tasks."migration:generate"]
+  cmd="alembic revision --autogenerate -m $message"
+  args=[{ name = "message", options = ["-m", "--message"], required = true, help = "Migration's name" }]
+
 [tool.poetry]
 name = "oipie-api-core"
 version = "0.1.0"
