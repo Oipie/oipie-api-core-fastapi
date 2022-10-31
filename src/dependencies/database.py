@@ -1,21 +1,36 @@
 """
 Database dependencies
 """
+from fastapi import Depends
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.ext.declarative import declarative_base
 from src.config.database import database_url_connection
 
-engine = create_engine(database_url_connection())
-SessionLocal = sessionmaker(bind=engine)
 BaseModel = declarative_base()
 
 
-def get_database() -> Session:
+def database_connection() -> str:
+    """
+    Returns a string representing the database URL connection
+    """
+    return database_url_connection()
+
+
+def testing_database_connection() -> str:
+    """
+    Returns a string representing the database URL connection for testing purposes
+    """
+    return database_url_connection({"database_name": "oipie_tests"})
+
+
+def get_database(connection_url=Depends(database_connection)) -> Session:
     """
     Returns a Session instance
     """
-    database = SessionLocal()
+    engine = create_engine(connection_url)
+    session_local = sessionmaker(bind=engine)
+    database = session_local()
     try:
         yield database
     finally:
