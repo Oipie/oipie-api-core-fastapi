@@ -11,34 +11,39 @@ lint = "pylint --output-format colorized src/**/*.py"
 "start:dev" = "uvicorn src.main:app --reload"
 test = "pytest"
 
-  [tool.poe.tasks."migration:generate"]
-  cmd="alembic revision --autogenerate -m $message"
-  args=[{ name = "message", options = ["-m", "--message"], required = true, help = "Migration's name" }]
+[tool.poe.tasks."migration:generate"]
+cmd = "alembic revision --autogenerate -m $message"
+args = [
+  { name = "message", options = [
+    "-m",
+    "--message",
+  ], required = true, help = "Migration's name" },
+]
 
 [tool.poetry]
 name = "oipie-api-core"
-version = "0.1.0"
+version = "0.0.1"
 description = ""
-authors = ["Jaume Moreno <morenocantoj@gmail.com>", "Jorge Bodega <jorge@acidtango.com>"]
+authors = [
+  "Jaume Moreno <morenocantoj@gmail.com>",
+  "Jorge Bodega <jorge@acidtango.com>",
+]
 readme = "README.md"
-packages = [{include = "oipie_api_core"}]
 
 [tool.poetry.dependencies]
+alembic = "1.8.1"
+databases = "0.6.1"
+fastapi = { extras = ["all"], version = "0.85.1" }
+psycopg2-binary = "2.9.4"
 python = "^3.10"
-fastapi = {extras = ["all"], version = "^0.85.1"}
-SQLAlchemy = "^1.4.42"
-databases = "^0.6.1"
-asyncpg = "^0.26.0"
-psycopg2-binary = "^2.9.4"
-alembic = "^1.8.1"
+SQLAlchemy = "1.4.42"
 
 
 [tool.poetry.group.dev.dependencies]
-pylint = "^2.15.5"
-python-dotenv = "^0.21.0"
-black = "^22.10.0"
-pytest = "^7.1.3"
-requests = "^2.28.1"
+black = "22.10.0"
+pylint = "2.15.5"
+pytest = "7.1.3"
+python-dotenv = "0.21.0"
 
 [build-system]
 requires = ["poetry-core"]
