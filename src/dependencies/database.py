@@ -31,10 +31,15 @@ def get_database(
     """
     Returns a Session instance
     """
-    engine = create_engine(connection_url)
+    engine = create_engine(connection_url, echo=True)
     session_local = sessionmaker(bind=engine)
-    database = session_local()
+    session = session_local()
+    _transaction = session.begin()
     try:
-        yield database
+        yield session
+        _transaction.commit()
+    except Exception:
+        _transaction.rollback()
+        raise
     finally:
-        database.close()
+        session.close()
