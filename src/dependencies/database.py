@@ -1,6 +1,7 @@
 """
 Database dependencies
 """
+from typing import Generator
 from fastapi import Depends
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
@@ -24,7 +25,9 @@ def testing_database_connection() -> str:
     return database_url_connection({"database_name": "oipie_tests"})
 
 
-def get_database(connection_url=Depends(database_connection)) -> Session:
+def get_database(
+    connection_url=Depends(database_connection),
+) -> Generator[Session, None, None]:
     """
     Returns a Session instance
     """

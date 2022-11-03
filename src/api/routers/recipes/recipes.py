@@ -12,7 +12,6 @@ router = APIRouter(prefix="/recipes", tags=["recipes"])
 
 
 @router.get("", response_model=PaginatedModel[RecipeOut])
-# async def index(session: Session = Depends(get_database)):
 async def index(
     recipes_lister_use_case: RecipesLister = Depends(recipes_lister),
 ):
@@ -20,13 +19,6 @@ async def index(
     Returns a list of recipes
     """
     [recipes, total_recipes] = recipes_lister_use_case.execute(0, 100)
-
-    print(
-        "total",
-        total_recipes,
-        "recipes parsed",
-        list(map(RecipeOut.from_domain_object, recipes)),
-    )
 
     return PaginatedModel[RecipeOut].serialize(
         list(map(RecipeOut.from_domain_object, recipes)),

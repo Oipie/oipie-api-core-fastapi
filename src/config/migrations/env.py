@@ -22,6 +22,7 @@ if config.config_file_name is not None:
 # target_metadata = mymodel.Base.metadata
 from src.dependencies.database import BaseModel
 from src.core.recipes.infrastructure import recipe_model
+from src.core.users.infrastructure import user_model
 
 target_metadata = BaseModel.metadata
 
@@ -46,7 +47,6 @@ def run_migrations_offline() -> None:
 
     """
     url = DATABASE_URL
-    print("THE URL", url)
     context.configure(
         url=url,
         target_metadata=target_metadata,
