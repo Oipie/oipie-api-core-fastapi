@@ -11,6 +11,9 @@ from src.api.routers.health import health
 from src.api.routers.recipes import recipes
 from src.api.routers.users import users
 from src.core.shared.domain.base_exception import DomainException
+from src.core.shared.infrastructure.domain_exception_category_http_mapper import (
+    get_http_status_code_by_domain_category,
+)
 
 DATABASE_URL = database_url_connection()
 
@@ -34,7 +37,9 @@ async def domain_exception_handler(_, exc: DomainException):
     Exception handler for domain exceptions
     """
 
-    return JSONResponse(str(exc), status_code=418)
+    return JSONResponse(
+        str(exc), status_code=get_http_status_code_by_domain_category(exc.category)
+    )
 
 
 app.include_router(health.router)
