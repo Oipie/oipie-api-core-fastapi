@@ -3,5 +3,6 @@
 scripts
 
 # Skip tests
-src/tests
 src/**/test_*
+src/tests
+src/conftest.py

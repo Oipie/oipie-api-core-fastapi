@@ -1,0 +1,5 @@
+[run]
+omit =
+    src/**/test_*
+    src/tests/*
+    src/conftest.py

@@ -1,5 +1,4 @@
 [tool.poe.tasks]
-"cov:report" = "coverage report -m"
 format = "black ."
 "format:check" = "black --check ."
 lint = "pylint --output-format colorized src/**/*.py"
