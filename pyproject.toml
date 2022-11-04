@@ -32,7 +32,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 alembic = "1.8.1"
-databases = "0.6.1"
+databases = { extras = ["asyncpg"], version = "0.6.1" }
 fastapi = { extras = ["all"], version = "0.85.1" }
 psycopg2-binary = "2.9.4"
 python = "^3.10"
