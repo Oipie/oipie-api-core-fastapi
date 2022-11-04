@@ -14,7 +14,7 @@ def test_serialize_is_ok():
 
     result = user.serialize()
 
-    assert result["id_"] == user_attributes["id_"]
+    assert result["uuid"] == user_attributes["uuid"]
     assert result["nickname"] == user_attributes["nickname"]
     assert result["email"] == user_attributes["email"]
     assert result["uuid"] == user_attributes["uuid"]

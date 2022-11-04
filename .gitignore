@@ -5,6 +5,11 @@
 __pycache__
 .pytest_cache
 
+# Pytest
+.coverage
+coverage.lcov
+htmlcov
+
 # Environment
 .env
 

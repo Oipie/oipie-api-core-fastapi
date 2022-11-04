@@ -42,5 +42,5 @@ class UsersRegisterer:
         self.__check_user_email(email)
         self.__check_user_nickname(nickname)
 
-        new_user = User.create(nickname, email, password=password)
+        new_user = User.create(nickname, email, password)
         self.users_repository.create(new_user)

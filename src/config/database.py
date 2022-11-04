@@ -2,6 +2,7 @@
     Database configuration
 """
 import os
+from typing import Optional
 
 
 DATABASE_CONFIG = {
@@ -15,7 +16,7 @@ DATABASE_CONFIG = {
 }
 
 
-def database_url_connection(override_config: dict or None = None):
+def database_url_connection(override_config: Optional[dict] = None):
     """
     Builds PostgreSQL database connection
     """

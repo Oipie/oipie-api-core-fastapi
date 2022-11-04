@@ -1,7 +1,7 @@
 """
 Recipe module
 """
-from typing import TypedDict
+from typing import Optional, TypedDict
 
 
 class RecipeAttributes(TypedDict):
@@ -13,7 +13,7 @@ class RecipeAttributes(TypedDict):
     name: str
     favourite_amount: int
     preparation_time: int
-    cover: str or None
+    cover: Optional[str]
 
 
 class Recipe:
