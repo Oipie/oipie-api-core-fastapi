@@ -3,7 +3,10 @@ E2E tests for recipes index
 """
 
 
-def test_index_recipes_works(api_client):
+from src.tests.utils.api_client import ApiClient
+
+
+def test_index_recipes_works(api_client: ApiClient):
     """
     This test checks if /recipes endpoint is up
     """

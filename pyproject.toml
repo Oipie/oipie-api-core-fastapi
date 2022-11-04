@@ -7,6 +7,7 @@ lint = "pylint --output-format colorized src/**/*.py"
 "migration:down" = { "cmd" = "alembic downgrade head-1", "envfile" = ".env" }
 "migration:test:up" = { "cmd" = "alembic upgrade head", "env" = { DATABASE_NAME = "oipie_tests" } }
 "migration:test:down" = { "cmd" = "alembic downgrade head-1", "env" = { DATABASE_NAME = "oipie_tests" } }
+mypy = "mypy src"
 "run:checks" = ["format:check", "lint:check"]
 "start:dev" = "uvicorn src.main:app --reload"
 test = "pytest"
@@ -43,10 +44,12 @@ SQLAlchemy = "1.4.42"
 
 [tool.poetry.group.dev.dependencies]
 black = "22.10.0"
+mypy = "0.982"
 pylint = "2.15.5"
 pytest = "7.2.0"
 pytest-cov = "4.0.0"
 python-dotenv = "0.21.0"
+sqlalchemy-stubs = "0.3"
 
 [build-system]
 requires = ["poetry-core"]

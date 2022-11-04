@@ -19,7 +19,7 @@ from src.tests.utils.api_client import ApiClient
 
 
 @pytest.fixture(scope="session")
-def connection():
+def connection() -> Iterable[Connection]:
     """
     Manages database connection
     """
@@ -32,7 +32,7 @@ def connection():
 
 
 @pytest.fixture()
-def transaction(connection):
+def transaction(connection) -> Iterable[None]:
     """
     Wraps the test in a transaction
     """
@@ -71,7 +71,7 @@ def test_client(session_handler: Session) -> Iterable[TestClient]:
 
 
 @pytest.fixture()
-def api_client(test_client: TestClient):
+def api_client(test_client: TestClient) -> Iterable[ApiClient]:
     """
     Generates an API Client
     """

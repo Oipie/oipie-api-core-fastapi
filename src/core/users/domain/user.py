@@ -22,10 +22,10 @@ class User:
     """
 
     def __init__(self, user_attributes: UserAttributes) -> None:
-        self.uuid = user_attributes.get("uuid")
-        self.nickname = user_attributes.get("nickname")
-        self.email = user_attributes.get("email")
-        self.password = user_attributes.get("password")
+        self.uuid = user_attributes["uuid"]
+        self.nickname = user_attributes["nickname"]
+        self.email = user_attributes["email"]
+        self.password = user_attributes["password"]
 
     @staticmethod
     def create(nickname: str, email: str, password: str):

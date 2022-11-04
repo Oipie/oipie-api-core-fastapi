@@ -22,11 +22,11 @@ class Recipe:
     """
 
     def __init__(self, recipe_attributes: RecipeAttributes) -> None:
-        self.uuid = recipe_attributes.get("uuid")
-        self.name = recipe_attributes.get("name")
-        self.favourite_amount = recipe_attributes.get("favourite_amount")
-        self.preparation_time = recipe_attributes.get("preparation_time")
-        self.cover = recipe_attributes.get("cover")
+        self.uuid = recipe_attributes["uuid"]
+        self.name = recipe_attributes["name"]
+        self.favourite_amount = recipe_attributes["favourite_amount"]
+        self.preparation_time = recipe_attributes["preparation_time"]
+        self.cover = recipe_attributes["cover"]
 
     def serialize(self) -> RecipeAttributes:
         """
