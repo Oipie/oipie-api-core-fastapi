@@ -1,0 +1,7 @@
+.github
+.vscode
+scripts
+
+# Skip tests
+src/tests
+src/**/test_*
