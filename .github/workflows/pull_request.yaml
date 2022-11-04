@@ -16,6 +16,29 @@ jobs:
       - name: success
         run: echo "is not a draft PR"
 
+  lint:
+    needs: skip-draft
+    runs-on: ubuntu-latest
+    container: "python:3.10.8-slim"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: '**/.venv'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/poetry.lock') }}
+      - name: Install poetry
+        run: pip install poetry==1.2.0
+      - name: Check dependencies
+        run: poetry lock --check
+      - name: Add poe (cli helper)
+        run: poetry self add 'poethepoet[poetry_plugin]'
+      - name: Install dependencies
+        run: poetry install
+      - name: Check code format (PEP8)
+        run: poe format:check
+      - name: Analysing the code with pylint
+        run: poe lint:check
+
   test:
     needs: skip-draft
     runs-on: ubuntu-latest
@@ -40,20 +63,20 @@ jobs:
           --health-retries 5
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: '**/.venv'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/poetry.lock') }}
       - name: Install poetry
         run: pip install poetry==1.2.0
-      - name: Disable poetry virtualenv on GitHub Actions
-        run: poetry config virtualenvs.create false --local
       - name: Check dependencies
         run: poetry lock --check
       - name: Add poe (cli helper)
         run: poetry self add 'poethepoet[poetry_plugin]'
       - name: Install dependencies
         run: poetry install
-      - name: Check code format (PEP8)
-        run: poe format:check
-      - name: Analysing the code with pylint
-        run: poe lint:check
+      - name: Run migrations
+        run: poe migration:test:up
       - name: Run tests
         run: poe test
         env:
