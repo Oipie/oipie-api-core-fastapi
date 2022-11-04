@@ -39,7 +39,9 @@ def test_create_creates_user():
     """
     user_attributes: UserAttributes = JOHN
     user = User.create(
-        user_attributes["nickname"], user_attributes["email"], user_attributes["password"]
+        user_attributes["nickname"],
+        user_attributes["email"],
+        user_attributes["password"],
     )
 
     assert user.uuid is not None

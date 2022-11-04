@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   postgres:
-    container_name: oipie-fastapi
+    container_name: oipie-database
     image: postgres:14.5
     volumes:
       - ./scripts/create-multiple-postgresql-databases.sh:/docker-entrypoint-initdb.d/99-oipie.sh
@@ -13,3 +13,10 @@ services:
       PGDATA: /data/postgres
       POSTGRES_TEST_DATABASE: oipie_tests
     restart: unless-stopped
+  web:
+    build: .
+    container_name: oipie-web
+    environment:
+      DATABASE_HOST: postgres
+    ports:
+      - "8000:8000"

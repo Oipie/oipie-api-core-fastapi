@@ -19,6 +19,7 @@ jobs:
   test:
     needs: skip-draft
     runs-on: ubuntu-latest
+    container: "python:3.10.8-slim"
     services:
       # Label used to access the service container
       postgres:
@@ -40,17 +41,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install poetry
-        uses: abatilo/actions-poetry@v2.1.4
-        with:
-          poetry-version: 1.2.0
-      - uses: actions/setup-python@v3
-        with:
-          python-version-file: '.python-version'
-          cache: 'poetry'
+        run: pip install poetry==1.2.0
       - name: Disable poetry virtualenv on GitHub Actions
         run: poetry config virtualenvs.create false --local
       - name: Check dependencies
         run: poetry lock --check
+      - name: Add poe (cli helper)
+        run: poetry self add 'poethepoet[poetry_plugin]'
       - name: Install dependencies
         run: poetry install
       - name: Check code format (PEP8)
