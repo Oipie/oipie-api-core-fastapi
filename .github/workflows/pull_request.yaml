@@ -40,6 +40,8 @@ jobs:
         run: poe lint:check
 
   test:
+    env:
+      DATABASE_HOST: postgres
     needs: skip-draft
     runs-on: ubuntu-latest
     container: "python:3.10.8-slim"
@@ -79,8 +81,6 @@ jobs:
         run: poe migration:test:up
       - name: Run tests
         run: poe test
-        env:
-          DATABASE_HOST: postgres
 
   docker-build:
     needs: skip-draft
