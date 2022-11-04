@@ -1,0 +1,83 @@
+name: Run tests on any Push event
+on:
+  pull_request:
+    branches:
+      - "main"
+
+jobs:
+  skip-draft:
+    name: skip draft
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: fail on draft
+        if: github.event.pull_request.draft == true
+        run: echo "is a draft PR, failing..." && exit 1
+      - name: success
+        run: echo "is not a draft PR"
+
+  test:
+    needs: skip-draft
+    runs-on: ubuntu-latest
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres:14.5
+        # Provide the password for postgres
+        env:
+          POSTGRES_DB: oipie_tests
+          POSTGRES_PASSWORD: password
+          POSTGRES_USER: oipie
+        # Set health checks to wait until postgres has started
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install poetry
+        uses: abatilo/actions-poetry@v2.1.4
+        with:
+          poetry-version: 1.2.0
+      - uses: actions/setup-python@v3
+        with:
+          python-version-file: '.python-version'
+          cache: 'poetry'
+      - name: Disable poetry virtualenv on GitHub Actions
+        run: poetry config virtualenvs.create false --local
+      - name: Check dependencies
+        run: poetry lock --check
+      - name: Install dependencies
+        run: poetry install
+      - name: Check code format (PEP8)
+        run: poe format:check
+      - name: Analysing the code with pylint
+        run: poe lint:check
+      - name: Run tests
+        run: poe test
+        env:
+          DATABASE_HOST: postgres
+
+  docker-build:
+    needs: skip-draft
+    name: Build Docker Container
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Build and push docker image
+        uses: docker/build-push-action@v3.1.1
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: api-core:latest
