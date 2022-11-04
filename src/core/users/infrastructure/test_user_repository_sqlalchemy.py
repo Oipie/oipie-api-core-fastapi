@@ -2,33 +2,15 @@
 User repository SQLAlchemy implementation tests
 """
 import pytest
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.orm import Session
 from src.core.users.domain.user import User
 from src.core.users.infrastructure.user_repository_sqlalchemy import (
     UsersRepositorySQLAlchemy,
 )
 from src.core.users.infrastructure.user_model import UserModel
-from src.dependencies.database import get_database, testing_database_connection
 from src.tests.fixtures.user_fixture import JOHN
 
 # pylint: disable=redefined-outer-name, unused-argument
-
-
-@pytest.fixture()
-def session_handler() -> Session:
-    """
-    Returns a session
-    """
-    engine = create_engine(testing_database_connection())
-    session_local = sessionmaker(bind=engine)
-    database = session_local()
-    transaction = database.begin()
-
-    yield database
-
-    transaction.rollback()
-    database.close()
 
 
 @pytest.fixture()
@@ -54,9 +36,6 @@ def create_john_user(session_handler: Session):
 
     session_handler.add(john_model)
     session_handler.flush()
-    # _session: Session = session_handler.get_session()
-    # _session.add(john_model)
-    # _session.flush()
 
 
 def test_find_by_email_not_finds_client(users_repository: UsersRepositorySQLAlchemy):

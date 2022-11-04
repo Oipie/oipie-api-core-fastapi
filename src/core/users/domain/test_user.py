@@ -14,7 +14,7 @@ def test_serialize_is_ok():
 
     result = user.serialize()
 
-    assert result["id_"] == user_attributes["id_"]
+    assert result["uuid"] == user_attributes["uuid"]
     assert result["nickname"] == user_attributes["nickname"]
     assert result["email"] == user_attributes["email"]
     assert result["uuid"] == user_attributes["uuid"]
@@ -39,7 +39,9 @@ def test_create_creates_user():
     """
     user_attributes: UserAttributes = JOHN
     user = User.create(
-        user_attributes["nickname"], user_attributes["email"], user_attributes["password"]
+        user_attributes["nickname"],
+        user_attributes["email"],
+        user_attributes["password"],
     )
 
     assert user.uuid is not None

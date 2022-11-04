@@ -34,7 +34,7 @@ class User:
         """
         return User(
             user_attributes={
-                "uuid": uuid4(),
+                "uuid": str(uuid4()),
                 "nickname": nickname,
                 "email": email,
                 "password": password,
@@ -49,6 +49,7 @@ class User:
             "uuid": self.uuid,
             "nickname": self.nickname,
             "email": self.email,
+            "password": self.password,
         }
 
         return user_serialized

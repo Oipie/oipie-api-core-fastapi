@@ -1,7 +1,7 @@
 """
 Database dependencies
 """
-from typing import Generator
+from typing import Iterable
 from fastapi import Depends
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
@@ -27,7 +27,7 @@ def testing_database_connection() -> str:
 
 def get_database(
     connection_url=Depends(database_connection),
-) -> Generator[Session, None, None]:
+) -> Iterable[Session]:
     """
     Returns a Session instance
     """
@@ -38,7 +38,7 @@ def get_database(
     try:
         yield session
         _transaction.commit()
-    except Exception:
+    except:
         _transaction.rollback()
         raise
     finally:
