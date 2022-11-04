@@ -1,0 +1,5 @@
+# By default backend developeres do review
+src @Oipie/backend
+
+# CICD and infrastructure files
+.github @Oipie/sre
