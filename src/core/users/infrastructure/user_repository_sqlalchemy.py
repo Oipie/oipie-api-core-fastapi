@@ -24,7 +24,7 @@ class UsersRepositorySQLAlchemy(UsersRepository):
         """
 
         user_model: Optional[UserModel] = (
-            self.session.query(self.model).filter_by(email=email).exists()
+            self.session.query(self.model).filter_by(email=email).one_or_none()
         )
         if user_model is None:
             return None
