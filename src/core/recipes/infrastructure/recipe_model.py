@@ -33,7 +33,7 @@ class RecipeModel(BaseModel):
             name=recipe.uuid,
             favourite_amount=recipe.favourite_amount,
             preparation_time=recipe.preparation_time,
-            cover=recipe.preparation_time,
+            cover=recipe.cover,
         )
 
     def to_domain_object(self) -> Recipe:

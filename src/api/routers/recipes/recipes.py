@@ -1,10 +1,13 @@
 """
 Routes file for Recipes
 """
+
 from fastapi import APIRouter, Depends
+from src.api.routers.recipes.models.recipe_create_dto import RecipeCreateDto
 from src.api.routers.recipes.models.recipe_out import RecipeOut
+from src.core.recipes.application.recipes_creator import RecipesCreator
 from src.core.recipes.application.recipes_lister import RecipesLister
-from src.core.recipes.infrastructure.dependencies import recipes_lister
+from src.core.recipes.infrastructure.dependencies import recipes_creator, recipes_lister
 from src.shared.models.paginated_model import PaginatedModel
 
 
@@ -19,6 +22,22 @@ async def index(
     Returns a list of recipes
     """
     [recipes, total_recipes] = recipes_lister_use_case.execute(0, 100)
+
+    return PaginatedModel[RecipeOut].serialize(
+        list(map(RecipeOut.from_domain_object, recipes)),
+        total_recipes,
+    )
+
+
+@router.post("")
+async def create(
+    recipe_create_dto: RecipeCreateDto,
+    recipes_creator_use_case: RecipesCreator = Depends(recipes_creator),
+):
+    """
+    Creates a recipe
+    """
+    [recipes, total_recipes] = recipes_creator_use_case.execute(recipe_create_dto)
 
     return PaginatedModel[RecipeOut].serialize(
         list(map(RecipeOut.from_domain_object, recipes)),

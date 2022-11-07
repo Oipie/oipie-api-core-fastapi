@@ -22,8 +22,9 @@ class UsersRepositorySQLAlchemy(UsersRepository):
         """
         Tries to find an user in database by their email
         """
+
         user_model: Optional[UserModel] = (
-            self.session.query(self.model).filter_by(email=email).one_or_none()
+            self.session.query(self.model).filter_by(email=email).exists()
         )
         if user_model is None:
             return None
@@ -47,6 +48,7 @@ class UsersRepositorySQLAlchemy(UsersRepository):
         """
         Inserts a new user to the database
         """
+
         user_model = UserModel.from_domain_object(user)
 
         self.session.add(user_model)

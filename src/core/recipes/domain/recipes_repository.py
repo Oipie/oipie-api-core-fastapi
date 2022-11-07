@@ -16,3 +16,10 @@ class RecipesRepository(abc.ABC):
         Find all recipes on database.
         """
         raise NotImplementedError
+
+    @abc.abstractmethod
+    def create(self, recipe: Recipe) -> Recipe:
+        """
+        Inserts user to repository
+        """
+        raise NotImplementedError
