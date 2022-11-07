@@ -4,6 +4,7 @@ Routes file for Recipes
 from http import HTTPStatus
 from fastapi import APIRouter, Depends
 from src.api.routers.users.models.user_create_dto import UserCreateDto
+from src.api.routers.users.models.user_response_dto import UserResponseDto
 from src.core.users.application.users_registerer import UsersRegisterer
 from src.core.users.infrastructure.dependencies import users_registerer
 
@@ -18,8 +19,10 @@ async def index(
     """
     Create a new user
     """
-    users_registerer_use_case.execute(
+    created_user = users_registerer_use_case.execute(
         nickname=user_create_dto.nickname,
         email=user_create_dto.email,
         password=user_create_dto.password,
     )
+
+    return UserResponseDto.from_domain_object(created_user)

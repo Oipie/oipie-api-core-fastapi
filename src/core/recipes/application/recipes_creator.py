@@ -29,4 +29,6 @@ class RecipesCreator:
         """
         Create a new recipe
         """
-        return self.recipes_repository.create(**recipes_creator_params)
+        new_recipe = Recipe.create(**recipes_creator_params)
+
+        return self.recipes_repository.create(new_recipe)

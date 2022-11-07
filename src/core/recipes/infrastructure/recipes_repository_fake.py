@@ -17,14 +17,14 @@ class RecipesRepositoryFake(RecipesRepository):
         if recipes is None:
             recipes = []
 
-        self.recipes = recipes
+        self._recipes = recipes
 
     def find_all(self, offset: int, limit: int) -> tuple[list[Recipe], int]:
         """
         Gets all recipes from database and returns domain objects
         """
 
-        return list(self.recipes)[offset : (offset + limit)], len(self.recipes)
+        return list(self._recipes)[offset : (offset + limit)], len(self._recipes)
 
     def create(self, recipe: Recipe) -> Recipe:
         """

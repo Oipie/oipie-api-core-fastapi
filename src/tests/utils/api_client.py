@@ -3,7 +3,7 @@ ApiClient
 """
 from http import HTTPStatus
 from fastapi.testclient import TestClient
-from src.api.routers.recipes.models.recipe_out import RecipeOut
+from src.api.routers.recipes.models.recipe_response_dto import RecipeResponseDto
 from src.api.routers.users.models.user_create_dto import UserCreateDto
 from src.shared.models.paginated_model import PaginatedModel
 
@@ -18,7 +18,7 @@ class ApiClient:
 
     def get_recipes(
         self, expected_status_code=HTTPStatus.OK
-    ) -> PaginatedModel[RecipeOut]:
+    ) -> PaginatedModel[RecipeResponseDto]:
         """
         GET /recipes endpoint
         """
