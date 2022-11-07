@@ -1,6 +1,7 @@
 """
 Users registerer use case
 """
+from src.core.shared.services.password.password import Password
 from src.core.users.domain.errors.user_with_email_already_exists_error import (
     UserWithEmailAlreadyExistsError,
 )
@@ -16,8 +17,9 @@ class UsersRegisterer:
     This class creates a new user
     """
 
-    def __init__(self, users_repository: UsersRepository):
+    def __init__(self, users_repository: UsersRepository, password_hasher: Password):
         self.users_repository = users_repository
+        self.password_hasher = password_hasher
 
     def __check_user_email(self, email: str):
         """
@@ -42,5 +44,7 @@ class UsersRegisterer:
         self.__check_user_email(email)
         self.__check_user_nickname(nickname)
 
-        new_user = User.create(nickname, email, password)
+        new_user = User.create(
+            nickname, email, password=self.password_hasher.generate_from(password)
+        )
         self.users_repository.create(new_user)
