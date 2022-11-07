@@ -37,6 +37,6 @@ async def create(
     """
     Creates a recipe
     """
-    created_recipe = recipes_creator_use_case.execute(recipe_create_dto)
+    created_recipe = recipes_creator_use_case.execute(recipe_create_dto.dict())
 
     return RecipeResponseDto.from_domain_object(created_recipe)

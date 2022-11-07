@@ -1,10 +1,13 @@
 """
 ApiClient
 """
+import pytest
 from http import HTTPStatus
 from fastapi.testclient import TestClient
+from src.api.routers.recipes.models.recipe_create_dto import RecipeCreateDto
 from src.api.routers.recipes.models.recipe_response_dto import RecipeResponseDto
 from src.api.routers.users.models.user_create_dto import UserCreateDto
+from src.api.routers.users.models.user_response_dto import UserResponseDto
 from src.shared.models.paginated_model import PaginatedModel
 
 
@@ -28,13 +31,28 @@ class ApiClient:
 
         return response.json()
 
+    def create_recipe(
+        self,
+        recipe_create_dto: RecipeCreateDto,
+        expected_status_code=HTTPStatus.CREATED,
+    ) -> RecipeResponseDto:
+        """
+        POST /recipes endpoint
+        """
+        response = self._client.post("/recipes", json=recipe_create_dto.dict())
+
+        assert response.status_code == expected_status_code
+
+        return response.json()
+
     def create_user(
         self, user_create_dto: UserCreateDto, expected_status_code=HTTPStatus.CREATED
-    ) -> None:
+    ) -> UserResponseDto:
         """
         POST /users endpoint
         """
         response = self._client.post("/users", json=user_create_dto.dict())
-        print(response.status_code)
 
         assert response.status_code == expected_status_code
+
+        return response.json()

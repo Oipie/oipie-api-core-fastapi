@@ -40,13 +40,13 @@ class Recipe:
         Creates a new recipe with a new uuid
         """
         return Recipe(
-            {
-                "uuid": str(uuid4()),
-                "name": name,
-                "favourite_amount": favourite_amount,
-                "preparation_time": preparation_time,
-                "cover": cover,
-            }
+            RecipeAttributes(
+                uuid=str(uuid4()),
+                name=name,
+                favourite_amount=favourite_amount,
+                preparation_time=preparation_time,
+                cover=cover,
+            )
         )
 
     def serialize(self) -> RecipeAttributes:

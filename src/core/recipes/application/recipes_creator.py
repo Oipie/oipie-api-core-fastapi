@@ -29,6 +29,11 @@ class RecipesCreator:
         """
         Create a new recipe
         """
-        new_recipe = Recipe.create(**recipes_creator_params)
+        new_recipe = Recipe.create(
+            name=recipes_creator_params["name"],
+            favourite_amount=recipes_creator_params["favourite_amount"],
+            preparation_time=recipes_creator_params["preparation_time"],
+            cover=recipes_creator_params["cover"],
+        )
 
         return self.recipes_repository.create(new_recipe)
