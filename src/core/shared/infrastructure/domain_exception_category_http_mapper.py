@@ -7,6 +7,7 @@ from src.core.shared.infrastructure.domain_exception_category import (
 
 domain_exception_category_http_map: Mapping[DomainExceptionCategory, int] = {
     DomainExceptionCategory.BAD_REQUEST: status.HTTP_400_BAD_REQUEST,
+    DomainExceptionCategory.UNAUTHORIZED: status.HTTP_401_UNAUTHORIZED,
     DomainExceptionCategory.CONFLICT: status.HTTP_409_CONFLICT,
     DomainExceptionCategory.NOT_FOUND: status.HTTP_404_NOT_FOUND,
     DomainExceptionCategory.UNKNOWN: status.HTTP_500_INTERNAL_SERVER_ERROR,

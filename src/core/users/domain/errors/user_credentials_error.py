@@ -1,7 +1,10 @@
 """
 UserCredentialsError
 """
-from src.core.shared.domain.base_exception import DomainException, ExceptionCategory
+from src.core.shared.domain.base_exception import (
+    DomainException,
+    DomainExceptionCategory,
+)
 
 
 class UserCredentialsError(DomainException):
@@ -13,5 +16,5 @@ class UserCredentialsError(DomainException):
         super().__init__(
             message="User email or password are not correct",
             code="USER_CREDENTIALS_WRONG",
-            category=ExceptionCategory.BAD_REQUEST,
+            category=DomainExceptionCategory.UNAUTHORIZED,
         )
