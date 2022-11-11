@@ -8,6 +8,8 @@ from src.api.routers.recipes.models.recipe_create_dto import RecipeCreateDto
 from src.api.routers.recipes.models.recipe_response_dto import RecipeResponseDto
 from src.api.routers.users.models.user_create_dto import UserCreateDto
 from src.api.routers.users.models.user_response_dto import UserResponseDto
+from src.api.routers.users.models.user_login_in import UserLoginIn
+from src.api.routers.users.models.user_login_out import UserLoginOut
 from src.shared.models.paginated_model import PaginatedModel
 
 
@@ -52,6 +54,16 @@ class ApiClient:
         POST /users endpoint
         """
         response = self._client.post("/users", json=user_create_dto.dict())
+
+        assert response.status_code == expected_status_code
+
+    def login_user(
+        self, user_login_in: UserLoginIn, expected_status_code=HTTPStatus.CREATED
+    ) -> UserLoginOut:
+        """
+        POST /users/login endpoint
+        """
+        response = self._client.post("/users/login", json=user_login_in.dict())
 
         assert response.status_code == expected_status_code
 
