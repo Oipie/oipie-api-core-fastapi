@@ -17,7 +17,9 @@ class RecipesRepositorySQLAlchemy(RecipesRepository):
     def __init__(self, session: Session):
         self.session = session
 
-    def find_all(self, offset: int, limit: int) -> tuple[list[Recipe], int]:
+    def find_all(
+        self, offset: int = None, limit: int = None
+    ) -> tuple[list[Recipe], int]:
         """
         Gets all recipes from database and returns domain objects
         """
