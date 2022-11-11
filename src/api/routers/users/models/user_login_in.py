@@ -2,7 +2,7 @@
 User login representation for requests
 """
 
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 
 class UserLoginIn(BaseModel):
@@ -10,5 +10,5 @@ class UserLoginIn(BaseModel):
     Represents a Recipe for recipes related endpoints
     """
 
-    email: str
+    email: EmailStr
     password: str
