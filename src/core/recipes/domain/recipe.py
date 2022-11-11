@@ -2,6 +2,7 @@
 Recipe module
 """
 from typing import Optional, TypedDict
+from uuid import uuid4
 
 
 class RecipeAttributes(TypedDict):
@@ -27,6 +28,26 @@ class Recipe:
         self.favourite_amount = recipe_attributes.get("favourite_amount")
         self.preparation_time = recipe_attributes.get("preparation_time")
         self.cover = recipe_attributes.get("cover")
+
+    @staticmethod
+    def create(
+        name: str,
+        favourite_amount: str,
+        preparation_time: str,
+        cover: Optional[str] = None,
+    ):
+        """
+        Creates a new recipe with a new uuid
+        """
+        return Recipe(
+            RecipeAttributes(
+                uuid=str(uuid4()),
+                name=name,
+                favourite_amount=favourite_amount,
+                preparation_time=preparation_time,
+                cover=cover,
+            )
+        )
 
     def serialize(self) -> RecipeAttributes:
         """

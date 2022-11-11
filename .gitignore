@@ -1,6 +1,9 @@
 # Virtual environments
 .venv
 
+# Mypy
+.mypy_cache
+
 # Pycache
 __pycache__
 .pytest_cache

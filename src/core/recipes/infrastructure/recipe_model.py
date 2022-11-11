@@ -30,10 +30,10 @@ class RecipeModel(BaseModel):
         """
         return RecipeModel(
             uuid=recipe.uuid,
-            name=recipe.uuid,
+            name=recipe.name,
             favourite_amount=recipe.favourite_amount,
             preparation_time=recipe.preparation_time,
-            cover=recipe.preparation_time,
+            cover=recipe.cover,
         )
 
     def to_domain_object(self) -> Recipe:

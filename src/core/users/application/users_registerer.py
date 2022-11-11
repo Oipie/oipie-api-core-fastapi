@@ -37,7 +37,7 @@ class UsersRegisterer:
         if user is not None:
             raise UserWithNicknameAlreadyExistsError(nickname)
 
-    def execute(self, nickname: str, email: str, password: str) -> None:
+    def execute(self, nickname: str, email: str, password: str) -> User:
         """
         Creates a user if their nickname nor email exist in database
         """
@@ -47,4 +47,4 @@ class UsersRegisterer:
         new_user = User.create(
             nickname, email, password=self.password_hasher.generate_from(password)
         )
-        self.users_repository.create(new_user)
+        return self.users_repository.create(new_user)

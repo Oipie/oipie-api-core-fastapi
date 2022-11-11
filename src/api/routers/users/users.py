@@ -4,6 +4,7 @@ Routes file for Recipes
 from http import HTTPStatus
 from fastapi import APIRouter, Depends
 from src.api.routers.users.models.user_create_dto import UserCreateDto
+from src.api.routers.users.models.user_response_dto import UserResponseDto
 from src.api.routers.users.models.user_login_in import UserLoginIn
 from src.api.routers.users.models.user_login_out import UserLoginOut
 from src.core.users.application.users_login import UsersLogin
@@ -21,11 +22,13 @@ async def create(
     """
     Create a new user
     """
-    users_registerer_use_case.execute(
+    created_user = users_registerer_use_case.execute(
         nickname=user_create_dto.nickname,
         email=user_create_dto.email,
         password=user_create_dto.password,
     )
+
+    return UserResponseDto.from_domain_object(created_user)
 
 
 @router.post("/login", status_code=HTTPStatus.CREATED, response_model=UserLoginOut)
