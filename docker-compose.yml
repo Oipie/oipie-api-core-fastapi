@@ -2,7 +2,7 @@ version: "3.7"
 services:
   postgres:
     container_name: oipie-database
-    image: postgres:15.0
+    image: postgres:15.1
     volumes:
       - ./scripts/create-multiple-postgresql-databases.sh:/docker-entrypoint-initdb.d/99-oipie.sh
     ports:
