@@ -19,7 +19,7 @@ jobs:
   lint:
     needs: skip-draft
     runs-on: ubuntu-latest
-    container: "python:3.10.8-slim"
+    container: "python:3.11.0-slim"
     steps:
       - uses: actions/checkout@v3
       - uses: actions/cache@v3
@@ -44,12 +44,12 @@ jobs:
       DATABASE_HOST: postgres
     needs: skip-draft
     runs-on: ubuntu-latest
-    container: "python:3.10.8-slim"
+    container: "python:3.11.0-slim"
     services:
       # Label used to access the service container
       postgres:
         # Docker Hub image
-        image: postgres:15.0
+        image: postgres:15.1
         # Provide the password for postgres
         env:
           POSTGRES_DB: oipie_tests
