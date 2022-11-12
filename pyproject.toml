@@ -40,7 +40,7 @@ fastapi = { extras = ["all"], version = "0.86.0" }
 psycopg2-binary = "2.9.5"
 PyJWT = "2.6.0"
 python = "^3.10"
-SQLAlchemy = "1.4.43"
+SQLAlchemy = "1.4.44"
 
 
 [tool.poetry.group.dev.dependencies]
