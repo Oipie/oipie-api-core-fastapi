@@ -57,6 +57,8 @@ class ApiClient:
 
         assert response.status_code == expected_status_code
 
+        return response.json()
+
     def login_user(
         self, user_login_in: UserLoginIn, expected_status_code=HTTPStatus.CREATED
     ) -> UserLoginOut:

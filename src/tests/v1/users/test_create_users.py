@@ -1,7 +1,6 @@
 """
 E2E tests for user creation
 """
-
 from http import HTTPStatus
 from src.api.routers.users.models.user_create_dto import UserCreateDto
 from src.tests.fixtures.user_fixture import JANE, JOHN

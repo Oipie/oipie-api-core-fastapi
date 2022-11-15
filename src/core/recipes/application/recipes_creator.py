@@ -15,6 +15,7 @@ class RecipesCreatorParams(TypedDict):
     favourite_amount: int
     preparation_time: int
     cover: Optional[str]
+    owner: str
 
 
 class RecipesCreator:
@@ -34,6 +35,7 @@ class RecipesCreator:
             favourite_amount=recipes_creator_params["favourite_amount"],
             preparation_time=recipes_creator_params["preparation_time"],
             cover=recipes_creator_params["cover"],
+            owner=recipes_creator_params["owner"],
         )
 
         return self.recipes_repository.create(new_recipe)

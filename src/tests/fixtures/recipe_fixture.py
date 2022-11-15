@@ -2,6 +2,7 @@
 Recipe Fixture
 """
 from src.core.recipes.domain.recipe import RecipeAttributes
+from src.tests.fixtures.user_fixture import JOHN
 
 PANCAKE: RecipeAttributes = {
     "uuid": "84d4430d-eddc-47fe-84af-556d3f0f3e25",
@@ -9,6 +10,7 @@ PANCAKE: RecipeAttributes = {
     "favourite_amount": 10,
     "preparation_time": 10000,
     "cover": "https://an-url.com/a/picture.png",
+    "owner": JOHN["uuid"],
 }
 
 STRAWBERRY_SMOOTHIE: RecipeAttributes = {
@@ -17,4 +19,5 @@ STRAWBERRY_SMOOTHIE: RecipeAttributes = {
     "favourite_amount": 20,
     "preparation_time": 8500,
     "cover": "https://an-url.com/a/smoothie.png",
+    "owner": JOHN["uuid"],
 }

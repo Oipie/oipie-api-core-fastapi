@@ -13,17 +13,8 @@ from src.tests.fixtures.user_fixture import JOHN
 # pylint: disable=redefined-outer-name, unused-argument
 
 
-@pytest.fixture()
-def users_repository(session_handler: Session) -> UsersRepositorySQLAlchemy:
-    """
-    Creates a UserRepositorySQLAlchemy instance with session
-    """
-
-    return UsersRepositorySQLAlchemy(session_handler)
-
-
-@pytest.fixture()
-def create_john_user(session_handler: Session):
+@pytest.fixture
+def create_john_user(session_handler: Session) -> UserModel:
     """
     Creates user from JOHN fixture
     """
@@ -36,6 +27,8 @@ def create_john_user(session_handler: Session):
 
     session_handler.add(john_model)
     session_handler.flush()
+
+    return john_model
 
 
 def test_find_by_email_not_finds_client(users_repository: UsersRepositorySQLAlchemy):

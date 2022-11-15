@@ -15,3 +15,4 @@ class RecipeCreateDto(BaseModel):
     favourite_amount: int
     preparation_time: int
     cover: Optional[str]
+    owner: str

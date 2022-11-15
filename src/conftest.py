@@ -9,6 +9,12 @@ from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Connection
 from sqlalchemy.orm import sessionmaker, Session
+from src.core.recipes.infrastructure.recipes_repository_sqlalchemy import (
+    RecipesRepositorySQLAlchemy,
+)
+from src.core.users.infrastructure.user_repository_sqlalchemy import (
+    UsersRepositorySQLAlchemy,
+)
 from src.dependencies.database import (
     database_connection,
     get_database,
@@ -31,7 +37,7 @@ def connection():
     _connection.close()
 
 
-@pytest.fixture()
+@pytest.fixture
 def transaction(connection):
     """
     Wraps the test in a transaction
@@ -43,7 +49,7 @@ def transaction(connection):
     _transaction.rollback()
 
 
-@pytest.fixture()
+@pytest.fixture
 def session_handler(connection: Connection, transaction) -> Iterable[Session]:
     """
     Creates a session handler
@@ -56,7 +62,25 @@ def session_handler(connection: Connection, transaction) -> Iterable[Session]:
     database.close()
 
 
-@pytest.fixture()
+@pytest.fixture
+def users_repository(session_handler: Session) -> UsersRepositorySQLAlchemy:
+    """
+    Creates a UserRepositorySQLAlchemy instance with session
+    """
+
+    return UsersRepositorySQLAlchemy(session_handler)
+
+
+@pytest.fixture
+def recipes_repository(session_handler: Session) -> RecipesRepositorySQLAlchemy:
+    """
+    Creates a RecipesRepositorySQLAlchemy instance with session
+    """
+
+    return RecipesRepositorySQLAlchemy(session_handler)
+
+
+@pytest.fixture
 def test_client(session_handler: Session) -> Iterable[TestClient]:
     """
     Returns an instance of TestClient based in main's app
@@ -70,7 +94,7 @@ def test_client(session_handler: Session) -> Iterable[TestClient]:
     app.dependency_overrides = {}
 
 
-@pytest.fixture()
+@pytest.fixture
 def api_client(test_client: TestClient):
     """
     Generates an API Client

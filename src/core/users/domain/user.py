@@ -14,6 +14,7 @@ class UserAttributes(TypedDict):
     nickname: str
     email: str
     password: str
+    recipes: list[str]
 
 
 class User:
@@ -26,6 +27,7 @@ class User:
         self.nickname = user_attributes.get("nickname")
         self.email = user_attributes.get("email")
         self.password = user_attributes.get("password")
+        self.recipes = user_attributes.get("recipes")
 
     @staticmethod
     def create(nickname: str, email: str, password: str):
@@ -38,6 +40,7 @@ class User:
                 "nickname": nickname,
                 "email": email,
                 "password": password,
+                "recipes": [],
             }
         )
 
@@ -50,6 +53,7 @@ class User:
             "nickname": self.nickname,
             "email": self.email,
             "password": self.password,
+            "recipes": self.recipes,
         }
 
         return user_serialized

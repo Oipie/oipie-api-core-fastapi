@@ -21,6 +21,7 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 from src.dependencies.database import BaseModel
+
 from src.core.recipes.infrastructure import recipe_model
 from src.core.users.infrastructure import user_model
 

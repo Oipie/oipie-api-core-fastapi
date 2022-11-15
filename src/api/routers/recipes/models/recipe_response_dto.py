@@ -17,6 +17,7 @@ class RecipeResponseDto(BaseModel):
     favourite_amount: int
     preparation_time: int
     cover: Optional[str]
+    owner: str
 
     @staticmethod
     def from_domain_object(recipe: Recipe):
@@ -29,4 +30,5 @@ class RecipeResponseDto(BaseModel):
             favourite_amount=recipe.favourite_amount,
             preparation_time=recipe.preparation_time,
             cover=recipe.cover,
+            owner=recipe.owner,
         )

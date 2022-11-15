@@ -4,8 +4,9 @@ Database dependencies
 from typing import Iterable
 from fastapi import Depends
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Session
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base, sessionmaker, Session
+
+# from sqlalchemy.ext.declarative import declarative_base
 from src.config.database import database_url_connection
 
 BaseModel = declarative_base()

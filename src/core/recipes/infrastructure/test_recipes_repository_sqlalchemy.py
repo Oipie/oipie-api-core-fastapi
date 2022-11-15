@@ -3,64 +3,102 @@ User repository SQLAlchemy implementation tests
 """
 import pytest
 from sqlalchemy.orm import Session
-from src.core.recipes.domain.recipe import Recipe
 from src.core.recipes.infrastructure.recipe_model import RecipeModel
 from src.core.recipes.infrastructure.recipes_repository_sqlalchemy import (
     RecipesRepositorySQLAlchemy,
 )
+from src.core.users.infrastructure.user_model import UserModel
 from src.tests.fixtures.recipe_fixture import PANCAKE, STRAWBERRY_SMOOTHIE
+from src.tests.fixtures.user_fixture import JOHN
 
 # pylint: disable=redefined-outer-name, unused-argument
 
 
-@pytest.fixture()
-def recipes_repository(session_handler: Session) -> RecipesRepositorySQLAlchemy:
+@pytest.fixture
+def create_john_user(session_handler: Session) -> UserModel:
     """
-    Creates a RecipesRepositorySQLAlchemy instance with session
+    Creates user from JOHN fixture
+    """
+    john_model = UserModel(
+        uuid=JOHN["uuid"],
+        nickname=JOHN["nickname"],
+        email=JOHN["email"],
+        password=JOHN["password"],
+    )
+
+    session_handler.add(john_model)
+    session_handler.flush()
+
+    return john_model
+
+
+@pytest.fixture
+def pancake_recipe_model(create_john_user: UserModel) -> RecipeModel:
+    """
+    Return a recipe model for PANCAKE fixture
     """
 
-    return RecipesRepositorySQLAlchemy(session_handler)
-
-
-@pytest.fixture()
-def create_pancake_recipe(session_handler: Session):
-    """
-    Creates recipe from PANCAKE fixture
-    """
-    pancake_model = RecipeModel(
+    return RecipeModel(
         uuid=PANCAKE["uuid"],
         name=PANCAKE["name"],
         favourite_amount=PANCAKE["favourite_amount"],
         preparation_time=PANCAKE["preparation_time"],
         cover=PANCAKE["cover"],
+        owner_id=create_john_user.uuid,
     )
 
-    session_handler.add(pancake_model)
-    session_handler.flush()
 
+@pytest.fixture
+def strawberry_smoothie_recipe_model(create_john_user: UserModel) -> RecipeModel:
+    """
+    Return a recipe model for PANCAKE fixture
+    """
 
-@pytest.fixture()
-def create_strawberry_smoothie_recipe(session_handler: Session):
-    """
-    Creates recipe from PANCAKE fixture
-    """
-    strawberry_smoothie_model = RecipeModel(
+    return RecipeModel(
         uuid=STRAWBERRY_SMOOTHIE["uuid"],
         name=STRAWBERRY_SMOOTHIE["name"],
         favourite_amount=STRAWBERRY_SMOOTHIE["favourite_amount"],
         preparation_time=STRAWBERRY_SMOOTHIE["preparation_time"],
         cover=STRAWBERRY_SMOOTHIE["cover"],
+        owner_id=create_john_user.uuid,
     )
 
-    session_handler.add(strawberry_smoothie_model)
+
+@pytest.fixture
+def create_pancake_recipe(
+    session_handler: Session, pancake_recipe_model: RecipeModel
+) -> RecipeModel:
+    """
+    Creates recipe from PANCAKE fixture
+    """
+
+    session_handler.add(pancake_recipe_model)
     session_handler.flush()
 
+    return pancake_recipe_model
 
-@pytest.fixture()
+
+@pytest.fixture
+def create_strawberry_smoothie_recipe(
+    session_handler: Session, strawberry_smoothie_recipe_model: RecipeModel
+):
+    """
+    Creates recipe from PANCAKE fixture
+    """
+
+    session_handler.add(strawberry_smoothie_recipe_model)
+    session_handler.flush()
+
+    return strawberry_smoothie_recipe_model
+
+
+@pytest.fixture
 def create_multiple_recipes(create_pancake_recipe, create_strawberry_smoothie_recipe):
     """
     Creates multiple recipes for using list finders
     """
+
+    return [create_pancake_recipe, create_strawberry_smoothie_recipe]
 
 
 def test_find_all_without_elements(recipes_repository: RecipesRepositorySQLAlchemy):
@@ -133,19 +171,13 @@ def test_find_all_with_multiple_elements_and_limit(
 
 def test_create_recipe(
     recipes_repository: RecipesRepositorySQLAlchemy,
+    pancake_recipe_model: RecipeModel,
 ):
     """
     Checks user is not found if email does not exist in repository
     """
 
-    recipe = recipes_repository.create(
-        Recipe.create(
-            name=PANCAKE["name"],
-            cover=PANCAKE["cover"],
-            preparation_time=PANCAKE["preparation_time"],
-            favourite_amount=PANCAKE["favourite_amount"],
-        )
-    )
+    recipe = recipes_repository.create(pancake_recipe_model.to_domain_object())
 
-    assert recipe.uuid != PANCAKE["uuid"]
+    assert recipe.uuid == PANCAKE["uuid"]
     assert recipe.name == PANCAKE["name"]

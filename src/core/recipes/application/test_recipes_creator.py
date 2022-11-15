@@ -24,6 +24,7 @@ def test_new_recipe_is_created():
             favourite_amount=PANCAKE["favourite_amount"],
             preparation_time=PANCAKE["preparation_time"],
             cover=PANCAKE["cover"],
+            owner=PANCAKE["owner"],
         )
     )
 

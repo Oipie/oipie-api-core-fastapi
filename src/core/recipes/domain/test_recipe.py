@@ -5,6 +5,8 @@ Tests to check Recipe class
 # pylint: disable=redefined-outer-name, unused-argument
 
 import pytest
+
+from src.tests.fixtures.recipe_fixture import PANCAKE, STRAWBERRY_SMOOTHIE
 from .recipe import Recipe, RecipeAttributes
 
 
@@ -13,34 +15,22 @@ def pancake() -> RecipeAttributes:
     """
     Returns a pancake recipe model
     """
-    return {
-        "uuid": "0aaadeb2-334e-4cc8-adf0-d11bf33c0a9e",
-        "name": "Delicious pancakes",
-        "favourite_amount": 100,
-        "preparation_time": 90000,
-        "cover": "https://path/to/image.png",
-    }
+    return PANCAKE
 
 
 @pytest.fixture()
 def strawberry_smoothie() -> RecipeAttributes:
     """
-    Returns a pancake recipe model
+    Returns a strawberry smoothie recipe model
     """
-    return {
-        "uuid": "a3d85b8f-d50f-4779-a258-5ef9b3304fb9",
-        "name": "Strawberry smoothie",
-        "favourite_amount": 50,
-        "preparation_time": 20000,
-        "cover": "https://path/to/image.png",
-    }
+    return STRAWBERRY_SMOOTHIE
 
 
 def test_serialize_is_ok(pancake):
     """
     Checks serialize serializes a recipe as expected
     """
-    recipe = Recipe(pancake)
+    recipe = Recipe(recipe_attributes=pancake)
 
     result = recipe.serialize()
 
