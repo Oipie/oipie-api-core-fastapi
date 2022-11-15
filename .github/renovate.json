@@ -2,7 +2,6 @@
   "extends": ["config:base"],
   "schedule": ["after 9pm and before 5am"],
   "prConcurrentLimit": 2,
-  "dependencyDashboard": true,
   "packageRules": [
     {
       "matchPackageNames": ["zricethezav/gitleaks-action"],
@@ -42,6 +41,12 @@
       "matchPackagePatterns": ["SQLAlchemy", "databases"],
       "groupName": "orm",
       "prPriority": 5,
+      "automerge": false
+    },
+    {
+      "matchPackageNames": ["python"],
+      "groupName": "python",
+      "prPriority": 1,
       "automerge": false
     }
   ]
