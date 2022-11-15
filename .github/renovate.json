@@ -37,6 +37,12 @@
       "groupName": "beta",
       "prPriority": 10,
       "automerge": false
+    },
+    {
+      "matchPackagePatterns": ["SQLAlchemy", "databases"],
+      "groupName": "orm",
+      "prPriority": 5,
+      "automerge": false
     }
   ]
 }
