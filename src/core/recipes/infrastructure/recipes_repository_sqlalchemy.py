@@ -17,10 +17,13 @@ class RecipesRepositorySQLAlchemy(RecipesRepository):
     def __init__(self, session: Session):
         self.session = session
 
-    def find_all(self, offset: int, limit: int) -> tuple[list[Recipe], int]:
+    def find_all(
+        self, offset: int = None, limit: int = None
+    ) -> tuple[list[Recipe], int]:
         """
         Gets all recipes from database and returns domain objects
         """
+
         query = self.session.query(RecipeModel)
         count: int = query.count()
         return (
@@ -32,3 +35,16 @@ class RecipesRepositorySQLAlchemy(RecipesRepository):
             ),
             count,
         )
+
+    def create(self, recipe: Recipe) -> Recipe:
+        """
+        Inserts a new user to the database
+        """
+
+        recipe_model = RecipeModel.from_domain_object(recipe)
+
+        self.session.add(recipe_model)
+        self.session.flush()
+        self.session.refresh(recipe_model)
+
+        return recipe_model.to_domain_object()

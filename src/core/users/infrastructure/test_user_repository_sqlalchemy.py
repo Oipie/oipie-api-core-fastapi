@@ -83,7 +83,6 @@ def test_find_by_nickname_finds_client(
     """
     nickname = JOHN["nickname"]
 
-    print(nickname)
     user = users_repository.find_by_nickname(nickname)
 
     assert user is not None

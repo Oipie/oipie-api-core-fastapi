@@ -2,7 +2,7 @@
 Data Transfer Object for User Creation
 """
 
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 
 class UserCreateDto(BaseModel):
@@ -11,5 +11,5 @@ class UserCreateDto(BaseModel):
     """
 
     nickname: str
-    email: str
+    email: EmailStr
     password: str

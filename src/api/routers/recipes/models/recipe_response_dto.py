@@ -7,7 +7,7 @@ from pydantic import BaseModel
 from src.core.recipes.domain.recipe import Recipe
 
 
-class RecipeOut(BaseModel):
+class RecipeResponseDto(BaseModel):
     """
     Represents a Recipe for recipes related endpoints
     """
@@ -23,7 +23,7 @@ class RecipeOut(BaseModel):
         """
         Returns a recipe JSONified
         """
-        return RecipeOut(
+        return RecipeResponseDto(
             id=recipe.uuid,
             name=recipe.name,
             favourite_amount=recipe.favourite_amount,

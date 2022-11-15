@@ -1,6 +1,7 @@
 """
 Users registerer use case
 """
+from src.core.shared.services.password.password import Password
 from src.core.users.domain.errors.user_with_email_already_exists_error import (
     UserWithEmailAlreadyExistsError,
 )
@@ -16,8 +17,9 @@ class UsersRegisterer:
     This class creates a new user
     """
 
-    def __init__(self, users_repository: UsersRepository):
+    def __init__(self, users_repository: UsersRepository, password_hasher: Password):
         self.users_repository = users_repository
+        self.password_hasher = password_hasher
 
     def __check_user_email(self, email: str):
         """
@@ -35,12 +37,14 @@ class UsersRegisterer:
         if user is not None:
             raise UserWithNicknameAlreadyExistsError(nickname)
 
-    def execute(self, nickname: str, email: str, password: str) -> None:
+    def execute(self, nickname: str, email: str, password: str) -> User:
         """
         Creates a user if their nickname nor email exist in database
         """
         self.__check_user_email(email)
         self.__check_user_nickname(nickname)
 
-        new_user = User.create(nickname, email, password)
-        self.users_repository.create(new_user)
+        new_user = User.create(
+            nickname, email, password=self.password_hasher.generate_from(password)
+        )
+        return self.users_repository.create(new_user)
