@@ -26,7 +26,7 @@ def testing_database_connection() -> str:
 
 
 def get_database(
-    connection_url=Depends(database_connection),
+    connection_url: str = Depends(database_connection),
 ) -> Iterable[Session]:
     """
     Returns a Session instance

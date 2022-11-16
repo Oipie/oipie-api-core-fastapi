@@ -10,14 +10,14 @@ class Tokenizer(abc.ABC):
     """
 
     @abc.abstractmethod
-    def encode(self, payload: dict) -> str:
+    def encode(self, payload: dict[str, str]) -> str:
         """
         Encodes a payload into an encoded string
         """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def decode(self, token: str) -> dict:
+    def decode(self, token: str) -> dict[str, str]:
         """
         Decodes an encoded string into a payload
         """
