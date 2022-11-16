@@ -1,7 +1,9 @@
 from logging.config import fileConfig
 
+from sqlalchemy import engine_from_config
+from sqlalchemy import pool
+
 from alembic import context
-from sqlalchemy import engine_from_config, pool
 
 from src.config.database import database_url_connection
 
@@ -14,14 +16,13 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-from src.core.recipes.infrastructure import recipe_model
-from src.core.users.infrastructure import user_model
-
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 from src.dependencies.database import BaseModel
+from src.core.recipes.infrastructure import recipe_model
+from src.core.users.infrastructure import user_model
 
 target_metadata = BaseModel.metadata
 
