@@ -1,18 +1,19 @@
 [tool.isort]
 profile = "black"
+skip_glob = ["src/config/**/*.py"]
 
 [tool.poe.tasks]
 format = "black ."
 "format:check" = "black --check ."
-isort = "isort --skip=src/config/migrations src/**/*.py"
-"isort:check" = "isort --skip=src/config/migrations --check src/**/*.py"
+isort = "isort ."
+"isort:check" = "isort --check ."
 lint = "pylint --output-format colorized src/**/*.py"
 "lint:check" = "pylint src/**/*.py"
 "migration:up" = { "cmd" = "alembic upgrade head", "envfile" = ".env" }
 "migration:down" = { "cmd" = "alembic downgrade head-1", "envfile" = ".env" }
 "migration:test:up" = { "cmd" = "alembic upgrade head", "env" = { DATABASE_NAME = "oipie_tests" } }
 "migration:test:down" = { "cmd" = "alembic downgrade head-1", "env" = { DATABASE_NAME = "oipie_tests" } }
-"run:checks" = ["format:check", "lint:check"]
+"run:checks" = ["format:check", "lint:check", "isort:check"]
 "start:dev" = "uvicorn src.main:app --reload"
 test = "pytest"
 "test:cov" = "pytest --cov=src"
@@ -49,6 +50,7 @@ SQLAlchemy = { extras = ["postgresql_psycopg2binary"], version = "1.4.44" }
 
 [tool.poetry.group.dev.dependencies]
 black = "22.10.0"
+isort = "5.10.1"
 pylint = "2.15.5"
 pytest = "7.2.0"
 pytest-cov = "4.0.0"
