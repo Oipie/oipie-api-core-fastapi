@@ -32,8 +32,8 @@ class Recipe:
     @staticmethod
     def create(
         name: str,
-        favourite_amount: str,
-        preparation_time: str,
+        favourite_amount: int,
+        preparation_time: int,
         cover: Optional[str] = None,
     ):
         """

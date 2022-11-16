@@ -4,6 +4,7 @@ BaseException
 from src.core.shared.infrastructure.domain_exception_category import (
     DomainExceptionCategory,
 )
+from src.core.shared.infrastructure.domain_exception_code import DomainExceptionCode
 
 
 class DomainException(Exception):
@@ -12,7 +13,11 @@ class DomainException(Exception):
     """
 
     def __init__(
-        self, message: str, code: str, category: DomainExceptionCategory, *args: object
+        self,
+        message: str,
+        code: DomainExceptionCode,
+        category: DomainExceptionCategory,
+        *args: object
     ) -> None:
         self.code = code
         self.category = category

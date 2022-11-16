@@ -30,6 +30,7 @@ class RecipesCreator:
         """
         Create a new recipe
         """
+
         new_recipe = Recipe.create(
             name=recipes_creator_params["name"],
             favourite_amount=recipes_creator_params["favourite_amount"],

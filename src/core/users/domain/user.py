@@ -54,7 +54,7 @@ class User:
 
         return user_serialized
 
-    def to_payload(self) -> dict:
+    def to_payload(self) -> dict[str, str]:
         """
         Returns an user to payload-based dict useful for encode user's information into a JWT
         """

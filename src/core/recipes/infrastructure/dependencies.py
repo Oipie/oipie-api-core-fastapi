@@ -32,7 +32,7 @@ def recipes_lister(
 
 def recipes_creator(
     recipes_repository_instance: RecipesRepository = Depends(recipes_repository),
-) -> RecipesLister:
+) -> RecipesCreator:
     """
     Returns an instance of RecipesCreator
     """

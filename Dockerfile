@@ -7,7 +7,7 @@ WORKDIR /python-docker
 COPY pyproject.toml pyproject.toml
 COPY poetry.lock poetry.lock
 
-RUN pip install poetry==1.2.0
+RUN pip install poetry==1.2.2
 
 RUN poetry config virtualenvs.create false
 RUN poetry install --only main

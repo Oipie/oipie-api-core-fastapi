@@ -5,18 +5,25 @@ from http import HTTPStatus
 
 from fastapi import APIRouter, Depends
 
+from src.api.routers.get_user_token import get_user_token
 from src.api.routers.users.models.user_create_dto import UserCreateDto
 from src.api.routers.users.models.user_login_in import UserLoginIn
 from src.api.routers.users.models.user_login_out import UserLoginOut
 from src.api.routers.users.models.user_response_dto import UserResponseDto
+from src.core.users.application.users_finder import UsersFinder
 from src.core.users.application.users_login import UsersLogin
 from src.core.users.application.users_registerer import UsersRegisterer
-from src.core.users.infrastructure.dependencies import users_login, users_registerer
+from src.core.users.infrastructure.dependencies import (
+    users_finder,
+    users_login,
+    users_registerer,
+)
+from src.shared.models.user_token_data import UserTokenData
 
 router = APIRouter(prefix="/users", tags=["users"])
 
 
-@router.post("", status_code=HTTPStatus.CREATED)
+@router.post("/register", status_code=HTTPStatus.CREATED)
 async def create(
     user_create_dto: UserCreateDto,
     users_registerer_use_case: UsersRegisterer = Depends(users_registerer),
@@ -45,3 +52,16 @@ async def login(
     )
 
     return UserLoginOut.from_domain_object(auth_token)
+
+
+@router.get("/me")
+async def show(
+    user_token: UserTokenData = Depends(get_user_token),
+    users_finder_use_case: UsersFinder = Depends(users_finder),
+):
+    """
+    Authenticates an existing user
+    """
+    found_user = users_finder_use_case.execute(user_token.email)
+
+    return UserResponseDto.from_domain_object(found_user)

@@ -1,6 +1,8 @@
 """
 SQLAlchemy repository for Recipes
 """
+from typing import Optional
+
 from sqlalchemy.orm import Session
 
 from src.core.recipes.domain.recipe import Recipe
@@ -19,7 +21,7 @@ class RecipesRepositorySQLAlchemy(RecipesRepository):
         self.session = session
 
     def find_all(
-        self, offset: int = None, limit: int = None
+        self, offset: Optional[int] = None, limit: Optional[int] = None
     ) -> tuple[list[Recipe], int]:
         """
         Gets all recipes from database and returns domain objects

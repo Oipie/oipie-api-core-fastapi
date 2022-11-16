@@ -1,12 +1,14 @@
 """
 Routes file for Recipes
 """
-
 from fastapi import APIRouter, Depends
 
 from src.api.routers.recipes.models.recipe_create_dto import RecipeCreateDto
 from src.api.routers.recipes.models.recipe_response_dto import RecipeResponseDto
-from src.core.recipes.application.recipes_creator import RecipesCreator
+from src.core.recipes.application.recipes_creator import (
+    RecipesCreator,
+    RecipesCreatorParams,
+)
 from src.core.recipes.application.recipes_lister import RecipesLister
 from src.core.recipes.infrastructure.dependencies import recipes_creator, recipes_lister
 from src.shared.models.paginated_model import PaginatedModel
@@ -37,6 +39,9 @@ async def create(
     """
     Creates a recipe
     """
-    created_recipe = recipes_creator_use_case.execute(recipe_create_dto.dict())
+
+    created_recipe = recipes_creator_use_case.execute(
+        RecipesCreatorParams(**recipe_create_dto.dict())
+    )
 
     return RecipeResponseDto.from_domain_object(created_recipe)
