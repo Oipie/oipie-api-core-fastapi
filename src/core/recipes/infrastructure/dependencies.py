@@ -4,6 +4,7 @@ Recipes module dependencies
 
 from fastapi import Depends
 from sqlalchemy.orm import Session
+
 from src.core.recipes.application.recipes_creator import RecipesCreator
 from src.core.recipes.application.recipes_lister import RecipesLister
 from src.core.recipes.domain.recipes_repository import RecipesRepository

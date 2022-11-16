@@ -2,9 +2,10 @@
 SQLAlchemy repository for Recipes
 """
 from sqlalchemy.orm import Session
+
+from src.core.recipes.domain.recipe import Recipe
 from src.core.recipes.domain.recipes_repository import RecipesRepository
 from src.core.recipes.infrastructure.recipe_model import RecipeModel
-from src.core.recipes.domain.recipe import Recipe
 
 
 class RecipesRepositorySQLAlchemy(RecipesRepository):

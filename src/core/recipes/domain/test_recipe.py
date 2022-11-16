@@ -5,6 +5,7 @@ Tests to check Recipe class
 # pylint: disable=redefined-outer-name, unused-argument
 
 import pytest
+
 from .recipe import Recipe, RecipeAttributes
 
 

@@ -3,6 +3,7 @@ Data Transfer Object for User Creation
 """
 
 from typing import Optional
+
 from pydantic import BaseModel
 
 

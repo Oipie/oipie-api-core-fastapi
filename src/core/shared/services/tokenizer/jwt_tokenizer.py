@@ -2,10 +2,11 @@
 JwtTokenizer
 """
 import jwt
-from src.core.shared.services.tokenizer.tokenizer import Tokenizer
+
 from src.core.shared.services.tokenizer.errors.invalid_token_error import (
     InvalidTokenError,
 )
+from src.core.shared.services.tokenizer.tokenizer import Tokenizer
 
 
 class JwtTokenizer(Tokenizer):

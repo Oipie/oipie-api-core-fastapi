@@ -1,12 +1,10 @@
 """
 Users Login use case
 """
-from src.core.users.domain.errors.user_credentials_error import (
-    UserCredentialsError,
-)
-from src.core.users.domain.users_repository import UsersRepository
 from src.core.shared.services.password.password import Password
 from src.core.shared.services.tokenizer.tokenizer import Tokenizer
+from src.core.users.domain.errors.user_credentials_error import UserCredentialsError
+from src.core.users.domain.users_repository import UsersRepository
 
 
 class UsersLogin:

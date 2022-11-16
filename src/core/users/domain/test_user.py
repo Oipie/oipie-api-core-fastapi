@@ -2,6 +2,7 @@
 Tests to check User class
 """
 from user import User, UserAttributes
+
 from src.tests.fixtures.user_fixture import JANE, JOHN
 
 

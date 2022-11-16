@@ -2,7 +2,9 @@
 SQLAlchemy repository for Users
 """
 from typing import Optional
+
 from sqlalchemy.orm import Session
+
 from src.core.users.domain.user import User
 from src.core.users.domain.users_repository import UsersRepository
 from src.core.users.infrastructure.user_model import UserModel

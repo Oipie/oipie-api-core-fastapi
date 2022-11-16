@@ -4,7 +4,9 @@ E2E tests for user login
 # pylint: disable=redefined-outer-name, unused-argument
 
 from http import HTTPStatus
+
 import pytest
+
 from src.api.routers.users.models.user_create_dto import UserCreateDto
 from src.api.routers.users.models.user_login_in import UserLoginIn
 from src.tests.fixtures.user_fixture import JANE, JOHN

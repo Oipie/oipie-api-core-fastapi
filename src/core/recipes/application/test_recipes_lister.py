@@ -1,12 +1,12 @@
 """
 Tests recipes lister
 """
+from src.core.recipes.application.recipes_lister import RecipesLister
 from src.core.recipes.domain.recipe import Recipe
 from src.core.recipes.infrastructure.recipes_repository_fake import (
     RecipesRepositoryFake,
 )
 from src.tests.fixtures.recipe_fixture import PANCAKE, STRAWBERRY_SMOOTHIE
-from src.core.recipes.application.recipes_lister import RecipesLister
 
 
 def test_serialize_is_ok():

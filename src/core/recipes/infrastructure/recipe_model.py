@@ -2,10 +2,12 @@
 Recipe Database Model
 """
 import uuid
+
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy import Column, String, Integer
-from src.dependencies.database import BaseModel
+
 from src.core.recipes.domain.recipe import Recipe
+from src.dependencies.database import BaseModel
 
 
 class RecipeModel(BaseModel):
