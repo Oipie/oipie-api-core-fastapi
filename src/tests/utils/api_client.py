@@ -2,8 +2,8 @@
 ApiClient
 """
 from http import HTTPStatus
+from typing import Optional, Type
 
-import pytest
 from fastapi.testclient import TestClient
 
 from src.api.routers.recipes.models.recipe_create_dto import RecipeCreateDto
@@ -55,9 +55,12 @@ class ApiClient:
         """
         POST /users endpoint
         """
-        response = self._client.post("/users", json=user_create_dto.dict())
+
+        response = self._client.post("/users/register", json=user_create_dto.dict())
 
         assert response.status_code == expected_status_code
+
+        return response.json()
 
     def login_user(
         self, user_login_in: UserLoginIn, expected_status_code=HTTPStatus.CREATED
@@ -66,6 +69,23 @@ class ApiClient:
         POST /users/login endpoint
         """
         response = self._client.post("/users/login", json=user_login_in.dict())
+
+        assert response.status_code == expected_status_code
+
+        return response.json()
+
+    def get_me(
+        self, bearer_token: Optional[str], expected_status_code=HTTPStatus.OK
+    ) -> UserResponseDto:
+        """
+        GET /users/me endpoint
+        """
+
+        headers = {}
+        if bearer_token is not None:
+            headers["Authorization"] = f"Bearer {bearer_token}"
+
+        response = self._client.get("/users/me", headers=headers)
 
         assert response.status_code == expected_status_code
 

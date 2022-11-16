@@ -2,6 +2,7 @@
     Domain users repository interface module
 """
 import abc
+from typing import Optional
 
 from src.core.users.domain.user import User
 
@@ -12,14 +13,14 @@ class UsersRepository(abc.ABC):
     """
 
     @abc.abstractmethod
-    def find_by_email(self, email: str) -> User or None:
+    def find_by_email(self, email: str) -> Optional[User]:
         """
         Finds user on repository by email
         """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def find_by_nickname(self, nickname: str) -> User or None:
+    def find_by_nickname(self, nickname: str) -> Optional[User]:
         """
         Finds user on repository by nickname
         """

@@ -9,6 +9,7 @@ from src.core.shared.services.password.dependencies import password_hasher
 from src.core.shared.services.password.password import Password
 from src.core.shared.services.tokenizer.dependencies import tokenizer
 from src.core.shared.services.tokenizer.tokenizer import Tokenizer
+from src.core.users.application.users_finder import UsersFinder
 from src.core.users.application.users_login import UsersLogin
 from src.core.users.application.users_registerer import UsersRegisterer
 from src.core.users.domain.users_repository import UsersRepository
@@ -47,4 +48,15 @@ def users_login(
         users_repository_instance,
         password_hasher_instance,
         tokenizer_instance,
+    )
+
+
+def users_finder(
+    users_repository_instance: UsersRepository = Depends(users_repository),
+) -> UsersFinder:
+    """
+    Returns an instance of UsersLogin
+    """
+    return UsersFinder(
+        users_repository_instance,
     )
