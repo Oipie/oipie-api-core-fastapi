@@ -1,6 +1,11 @@
+[tool.isort]
+profile = "black"
+
 [tool.poe.tasks]
 format = "black ."
 "format:check" = "black --check ."
+isort = "isort --skip=src/config/migrations src/**/*.py"
+"isort:check" = "isort --skip=src/config/migrations --check src/**/*.py"
 lint = "pylint --output-format colorized src/**/*.py"
 "lint:check" = "pylint src/**/*.py"
 "migration:up" = { "cmd" = "alembic upgrade head", "envfile" = ".env" }

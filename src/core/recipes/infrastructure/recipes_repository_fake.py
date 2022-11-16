@@ -2,8 +2,9 @@
 Recipes repository fake module
 """
 from typing import Optional
-from src.core.recipes.domain.recipes_repository import RecipesRepository
+
 from src.core.recipes.domain.recipe import Recipe
+from src.core.recipes.domain.recipes_repository import RecipesRepository
 
 
 class RecipesRepositoryFake(RecipesRepository):

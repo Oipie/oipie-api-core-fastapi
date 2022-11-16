@@ -3,7 +3,9 @@ Recipe representation for requests
 """
 
 from typing import Optional
+
 from pydantic import BaseModel
+
 from src.core.recipes.domain.recipe import Recipe
 
 

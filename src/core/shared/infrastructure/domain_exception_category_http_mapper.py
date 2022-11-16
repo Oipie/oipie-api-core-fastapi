@@ -1,4 +1,5 @@
 from typing import Mapping
+
 from fastapi import status
 
 from src.core.shared.infrastructure.domain_exception_category import (

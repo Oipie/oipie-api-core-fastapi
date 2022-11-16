@@ -36,6 +36,8 @@ jobs:
         run: poetry install
       - name: Check code format (PEP8)
         run: poe format:check
+      - name: Check import order (PEP8)
+        run: poe isort:check
       - name: Analysing the code with pylint
         run: poe lint:check
 

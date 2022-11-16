@@ -2,10 +2,12 @@
 User Database Model
 """
 import uuid
-from sqlalchemy.dialects.postgresql import UUID
+
 from sqlalchemy import Column, String
-from src.dependencies.database import BaseModel
+from sqlalchemy.dialects.postgresql import UUID
+
 from src.core.users.domain.user import User
+from src.dependencies.database import BaseModel
 
 
 class UserModel(BaseModel):

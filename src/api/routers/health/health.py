@@ -3,8 +3,8 @@ Routes file for Recipes
 """
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from src.dependencies.database import get_database
 
+from src.dependencies.database import get_database
 
 router = APIRouter(tags=["health"])
 

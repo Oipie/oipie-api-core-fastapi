@@ -2,6 +2,7 @@
 Users repository fake module
 """
 from typing import Optional
+
 from src.core.users.domain.user import User
 from src.core.users.domain.users_repository import UsersRepository
 

@@ -2,6 +2,7 @@
     Domain recipes repository interface module
 """
 import abc
+
 from src.core.recipes.domain.recipe import Recipe
 
 

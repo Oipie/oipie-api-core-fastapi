@@ -3,9 +3,9 @@ E2E tests for recipes index
 """
 
 import pytest
+
 from src.api.routers.recipes.models.recipe_create_dto import RecipeCreateDto
 from src.tests.fixtures.recipe_fixture import PANCAKE, STRAWBERRY_SMOOTHIE
-
 from src.tests.utils.api_client import ApiClient
 
 

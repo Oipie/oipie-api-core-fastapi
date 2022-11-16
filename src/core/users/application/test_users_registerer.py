@@ -2,6 +2,8 @@
 UsersRegisterer tests
 """
 import pytest
+
+from src.core.shared.services.password.plain_text_password import PlainTextPassword
 from src.core.users.application.users_registerer import UsersRegisterer
 from src.core.users.domain.errors.user_with_email_already_exists_error import (
     UserWithEmailAlreadyExistsError,
@@ -11,7 +13,6 @@ from src.core.users.domain.errors.user_with_nickname_already_exists_error import
 )
 from src.core.users.domain.user import User
 from src.core.users.infrastructure.user_repository_fake import UsersRepositoryFake
-from src.core.shared.services.password.plain_text_password import PlainTextPassword
 from src.tests.fixtures.user_fixture import JANE, JOHN
 
 # pylint: disable=redefined-outer-name

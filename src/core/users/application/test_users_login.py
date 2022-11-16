@@ -2,14 +2,13 @@
 UsersLogin tests
 """
 import pytest
-from src.core.users.application.users_login import UsersLogin
-from src.core.users.domain.errors.user_credentials_error import (
-    UserCredentialsError,
-)
-from src.core.users.domain.user import User
-from src.core.users.infrastructure.user_repository_fake import UsersRepositoryFake
+
 from src.core.shared.services.password.plain_text_password import PlainTextPassword
 from src.core.shared.services.tokenizer.jwt_tokenizer import JwtTokenizer
+from src.core.users.application.users_login import UsersLogin
+from src.core.users.domain.errors.user_credentials_error import UserCredentialsError
+from src.core.users.domain.user import User
+from src.core.users.infrastructure.user_repository_fake import UsersRepositoryFake
 from src.tests.fixtures.user_fixture import JANE, JOHN
 
 # pylint: disable=redefined-outer-name

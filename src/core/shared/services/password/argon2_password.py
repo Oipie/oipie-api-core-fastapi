@@ -3,6 +3,7 @@ Argon2 password generator
 """
 from argon2 import PasswordHasher
 from argon2.exceptions import VerificationError
+
 from src.core.shared.services.password.password import Password
 
 

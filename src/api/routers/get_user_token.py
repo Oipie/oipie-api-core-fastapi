@@ -3,10 +3,10 @@ Process bearer token to take information from it
 """
 
 from fastapi import Depends
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+
 from src.core.shared.services.tokenizer.dependencies import tokenizer
 from src.core.shared.services.tokenizer.tokenizer import Tokenizer
-
 from src.shared.models.user_token_data import UserTokenData
 
 

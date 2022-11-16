@@ -2,6 +2,7 @@
 Recipies Creator use case
 """
 from typing import Optional, TypedDict
+
 from src.core.recipes.domain.recipe import Recipe
 from src.core.recipes.domain.recipes_repository import RecipesRepository
 
