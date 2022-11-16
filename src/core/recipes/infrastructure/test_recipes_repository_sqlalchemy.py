@@ -3,6 +3,7 @@ User repository SQLAlchemy implementation tests
 """
 import pytest
 from sqlalchemy.orm import Session
+
 from src.core.recipes.domain.recipe import Recipe
 from src.core.recipes.infrastructure.recipe_model import RecipeModel
 from src.core.recipes.infrastructure.recipes_repository_sqlalchemy import (

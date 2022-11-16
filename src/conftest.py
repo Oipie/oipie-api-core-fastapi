@@ -4,11 +4,13 @@ E2E tests setup
 # pylint: disable=redefined-outer-name, unused-argument
 
 from typing import Iterable
+
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Connection
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.orm import Session, sessionmaker
+
 from src.dependencies.database import (
     database_connection,
     get_database,

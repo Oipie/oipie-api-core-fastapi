@@ -4,6 +4,7 @@ Recipes module dependencies
 
 from fastapi import Depends
 from sqlalchemy.orm import Session
+
 from src.core.shared.services.password.dependencies import password_hasher
 from src.core.shared.services.password.password import Password
 from src.core.shared.services.tokenizer.dependencies import tokenizer

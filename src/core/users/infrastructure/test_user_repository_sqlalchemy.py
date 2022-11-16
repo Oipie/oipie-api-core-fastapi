@@ -3,11 +3,12 @@ User repository SQLAlchemy implementation tests
 """
 import pytest
 from sqlalchemy.orm import Session
+
 from src.core.users.domain.user import User
+from src.core.users.infrastructure.user_model import UserModel
 from src.core.users.infrastructure.user_repository_sqlalchemy import (
     UsersRepositorySQLAlchemy,
 )
-from src.core.users.infrastructure.user_model import UserModel
 from src.tests.fixtures.user_fixture import JOHN
 
 # pylint: disable=redefined-outer-name, unused-argument

@@ -4,7 +4,6 @@
 import os
 from typing import Optional
 
-
 DATABASE_CONFIG = {
     "host": os.environ.get("DATABASE_HOST", "localhost"),
     "port": int(

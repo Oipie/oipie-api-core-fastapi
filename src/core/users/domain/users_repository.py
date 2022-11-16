@@ -2,6 +2,7 @@
     Domain users repository interface module
 """
 import abc
+
 from src.core.users.domain.user import User
 
 

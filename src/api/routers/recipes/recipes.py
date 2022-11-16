@@ -3,13 +3,13 @@ Routes file for Recipes
 """
 
 from fastapi import APIRouter, Depends
+
 from src.api.routers.recipes.models.recipe_create_dto import RecipeCreateDto
 from src.api.routers.recipes.models.recipe_response_dto import RecipeResponseDto
 from src.core.recipes.application.recipes_creator import RecipesCreator
 from src.core.recipes.application.recipes_lister import RecipesLister
 from src.core.recipes.infrastructure.dependencies import recipes_creator, recipes_lister
 from src.shared.models.paginated_model import PaginatedModel
-
 
 router = APIRouter(prefix="/recipes", tags=["recipes"])
 
