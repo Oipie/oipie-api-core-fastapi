@@ -51,7 +51,7 @@ jobs:
       # Label used to access the service container
       postgres:
         # Docker Hub image
-        image: postgres:15.1
+        image: postgres:15.5
         # Provide the password for postgres
         env:
           POSTGRES_DB: oipie_tests
@@ -97,7 +97,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Build and push docker image
-        uses: docker/build-push-action@v3.2.0
+        uses: docker/build-push-action@v3.3.1
         with:
           context: .
           file: ./Dockerfile
